@@ -1,21 +1,21 @@
-%define module	CGI-FastTemplate
-%define name	perl-%{module}
-%define version 1.09
-%define release %mkrel 8
+%define upstream_name	 CGI-FastTemplate
+%define upstream_version 1.09
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 1
+
 Summary:	Perl extension for managing templates, and performing variable interpolation
-License:	GPL or Artistic
+License:	GPL+ or Artistic
 Group:		Development/Perl
-Source:		http://search.cpan.org/CPAN/authors/id/J/JM/JMOORE/%{module}-%{version}.tar.bz2
-Url:		http://search.cpan.org/dist/%{module}
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://search.cpan.org/CPAN/authors/id/J/JM/JMOORE/%{upstream_name}-%{upstream_version}.tar.bz2
+
 %if %{mdkversion} < 1010
 Buildrequires:	perl-devel
 %endif
 Buildarch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 What is a template?
@@ -38,7 +38,7 @@ CGI::FastTemplate has the following attributes:
 - Flexibility
 
 %prep
-%setup -q -n %{module}-%{version}
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -59,6 +59,3 @@ rm -rf %{buildroot}
 %doc README templates
 %{perl_vendorlib}/CGI
 %{_mandir}/*/*
-
-
-
